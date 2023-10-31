@@ -20,9 +20,13 @@ public class ShipEngine : MonoBehaviour
     void Update()
     {
         input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-
+        buttonDown = Input.GetButton("Jump");
         // if button
-        transform.Translate(Vector3.forward);
+
+        if (buttonDown) {
+            transform.Translate(Vector3.forward);
+        }
+
         transform.Rotate(new Vector3(input.y, input.x, 0));
 
     }
