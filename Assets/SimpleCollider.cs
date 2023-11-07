@@ -7,7 +7,17 @@ public class SimpleCollider : MonoBehaviour
 {
     public UnityEvent onCollision;
 
+    public GameObject smoke;
+
     private void OnCollisionEnter2D(Collision2D collision) {
-        onCollision.Invoke();
+
+        if(collision.gameObject.tag != "Wall") {
+            onCollision.Invoke();
+
+            Instantiate(smoke, transform.position, Quaternion.identity);
+        }
+
+
+        
     }
 }
