@@ -29,7 +29,11 @@ public class PlayerMovement2D : MonoBehaviour
     {
         input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         jump = Input.GetButton("Jump");
-        jumpPressedThisFrame = Input.GetButtonDown("Jump");
+
+        if (Input.GetButtonDown("Jump")) {
+            jumpPressedThisFrame = true;
+        }
+        
 
 
         /// --- Animation stuff
@@ -60,15 +64,16 @@ public class PlayerMovement2D : MonoBehaviour
 
     private void FixedUpdate() {
 
+        //Movement
+        rigid.AddForce(new Vector2(input.x * xForce, 0), ForceMode2D.Force);
+
+
         // Reading input from Update and 
         if (jumpPressedThisFrame) {
-            rigid.AddForce(new Vector2(input.x * xForce, 0), ForceMode2D.Force);
-            jumpPressedThisFrame = false; 
+            rigid.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+            jumpPressedThisFrame = false;
+            Debug.Log("Jump Should be firing here. ");
         }
 
-        
-        if (jumpPressedThisFrame) {
-            rigid.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
-        }
     }
 }
