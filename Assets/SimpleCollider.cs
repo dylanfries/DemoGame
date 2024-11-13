@@ -14,7 +14,13 @@ public class SimpleCollider : MonoBehaviour
         if(collision.gameObject.tag != "Wall") {
             onCollision.Invoke();
 
-            Instantiate(smoke, transform.position, Quaternion.identity);
+            if(smoke != null) {
+                // Create a smoke cloud at the position of the transform.
+                // The last one is fun to say "Quat-ern-ian" and it is a 4 dimensional rotation
+                // 
+                Instantiate(smoke, transform.position, Quaternion.identity);
+            }
+            
         }
 
 
